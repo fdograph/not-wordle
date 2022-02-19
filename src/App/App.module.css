@@ -1,0 +1,9 @@
+.loadingWrapper {
+    @apply flex items-center justify-center w-full h-full;
+}
+
+.spinner {
+    @apply w-16 h-16 border-4 border-slate-50 border-solid rounded-full animate-spin;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}

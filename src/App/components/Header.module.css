@@ -1,0 +1,7 @@
+.header {
+    @apply flex items-center justify-center p-4;
+}
+
+.title {
+    @apply text-4xl font-thin;
+}

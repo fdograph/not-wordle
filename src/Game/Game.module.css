@@ -1,0 +1,14 @@
+.gameBoard {
+    @apply flex flex-col gap-[10px] pt-8 pb-8 pl-2 pr-2 justify-center w-full mx-auto;
+}
+
+.gameBoard.hasWinner .play {
+    @apply opacity-50;
+}
+.gameBoard.hasWinner .winnerPlay {
+    @apply opacity-100;
+}
+
+.keyboardArea {
+    @apply flex justify-center;
+}
