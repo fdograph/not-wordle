@@ -1,5 +1,11 @@
-# Getting Started with Create React App
+# Definitely not a Wordle clone
 
+### Visit the [Working Demo!!](https://fdograph.github.io/not-wordle/)
+
+
+
+
+# Dev docs
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
