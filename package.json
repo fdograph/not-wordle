@@ -1,6 +1,7 @@
 {
-  "name": "wordle-clone",
-  "version": "0.1.0",
+  "name": "@fdograph/not-wordle",
+  "homepage": "https://fdograph.github.io/not-wordle",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -22,6 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,6 +50,7 @@
     "autoprefixer": "^10.4.2",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "gh-pages": "^3.2.3",
     "postcss": "^8.4.6",
     "prettier": "^2.5.1",
     "tailwindcss": "^3.0.23"
