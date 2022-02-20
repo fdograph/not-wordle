@@ -10,7 +10,8 @@ import { useTranslation } from 'react-i18next';
 const isAllowedLetter = (s: string) => s.length === 1 && /[a-zñ]/gi.test(s);
 
 const selectWord = (list: string[]) => {
-  const word = list[~~(list.length * Math.random())];
+  // const word = list[~~(list.length * Math.random())];
+  const word = 'TROLL';
   const chars = word.split('').reduce((map, char) => {
     const count = map.get(char) ?? 0;
 
