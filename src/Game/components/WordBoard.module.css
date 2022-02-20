@@ -67,6 +67,10 @@
     animation-delay: 2000ms;
 }
 
+.letterBox.withStatus.neutral span:last-child {
+    @apply bg-slate-800;
+}
+
 .letterBox.withStatus.found span:last-child {
     @apply bg-amber-300;
 }

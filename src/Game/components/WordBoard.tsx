@@ -50,10 +50,9 @@ const getStatus = (
 
   if (found.get(char) !== undefined) {
     const correctCount = correct.get(char) ?? 0;
-    const foundCount = found.get(char) ?? 0;
-    const availCount = foundCount - correctCount;
     const repeatedCount = repeatedMap.get(char) ?? 0;
     const selectedCount = selectedCharMap.get(char) ?? 0;
+    const availCount = selectedCount - correctCount;
 
     if (correctCount === selectedCount) {
       return 'neutral';
@@ -115,6 +114,7 @@ export const WordBoard: React.FC<WordBoardProps> = ({
         className={classNames({
           [Styles.letterBox]: true,
           [Styles.withStatus]: withStatus,
+          [Styles.neutral]: status === 'neutral',
           [Styles.notFound]: status === 'notFound',
           [Styles.found]: status === 'found',
           [Styles.correct]: status === 'correct',
