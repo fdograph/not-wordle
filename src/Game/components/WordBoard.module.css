@@ -23,13 +23,8 @@
     @apply relative flex w-full gap-[10px] justify-center;
 }
 
-.wordBoard.hasError > div {
-    @apply opacity-30;
-}
-
-.wordBoard.hasError::after {
-    @apply absolute p-2 bg-orange-600 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
-    content: "Invalid Word";
+.wordBoard.hasError > div span {
+    @apply bg-orange-600;
 }
 
 .letterBox {

@@ -4,9 +4,10 @@ import Styles from './Game.module.css';
 import { WordBoard } from './components/WordBoard';
 import { Keyboard } from './components/Keyboard';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 // only single letters allowed (a-z|A-Z)
-const isAllowedLetter = (s: string) => s.length === 1 && /[a-z]/gi.test(s);
+const isAllowedLetter = (s: string) => s.length === 1 && /[a-zñ]/gi.test(s);
 
 const selectWord = (list: string[]) => {
   const word = list[~~(list.length * Math.random())];
@@ -28,6 +29,7 @@ interface GameProps {
   wordsLength: number;
 }
 export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
+  const { t } = useTranslation();
   const selectedWord = useMemo(() => selectWord(wordList), [wordList]);
   const [plays, setPlays] = useState<string[][]>([]);
   const [isWinner, setIsWinner] = useState<boolean>(false);
@@ -60,9 +62,9 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
     const isWinner = playerGuess.join('') === selectedWord.word;
     setIsWinner(isWinner);
     if (isWinner) {
-      alert('You Win!!!!!!!!!!!!!!!!1111oneoneone');
+      alert(t('winnerText'));
     }
-  }, [playerGuess, selectedWord]);
+  }, [playerGuess, selectedWord.word, t]);
 
   const onInput = useCallback(
     (keyInput: string) => {
