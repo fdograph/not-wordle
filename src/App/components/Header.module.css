@@ -3,7 +3,7 @@
 }
 
 .title {
-    @apply text-4xl font-thin;
+    @apply text-4xl font-bold;
 }
 
 .languageButton {
