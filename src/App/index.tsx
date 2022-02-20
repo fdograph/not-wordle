@@ -29,8 +29,6 @@ const App: React.FC = () => {
     }
   );
 
-  const list = ['POOLL', 'TROLL', 'LOOKS', 'LLLLL', 'LLDDD', 'LLLDD', 'LLDLD'];
-
   return query.isLoading ? (
     <div className={Styles.loadingWrapper}>
       <div className={Styles.spinner} />
@@ -38,7 +36,7 @@ const App: React.FC = () => {
   ) : (
     <>
       <Header />
-      <Game wordsLength={WORDS_LENGTH} wordList={list!} />
+      <Game wordsLength={WORDS_LENGTH} wordList={query.data!} />
     </>
   );
 };
