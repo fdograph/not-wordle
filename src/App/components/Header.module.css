@@ -1,7 +1,11 @@
 .header {
-    @apply flex items-center justify-center p-4;
+    @apply flex items-center justify-center p-4 gap-4;
 }
 
 .title {
     @apply text-4xl font-thin;
+}
+
+.languageButton {
+    @apply block p-1 px-2 bg-amber-300 text-slate-900 text-sm;
 }

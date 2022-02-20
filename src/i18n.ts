@@ -9,12 +9,16 @@ const resources = {
     translation: {
       appTitle: 'This is NOT Wordle',
       winnerText: 'You are a winner baby!',
+      changeLanguageToText: 'Ver en:',
+      changeLanguageToLabel: 'Change language to:',
     },
   },
   es: {
     translation: {
       appTitle: 'Esto NO es Wordle',
       winnerText: 'Felicitaciones! Ganaste!',
+      changeLanguageToText: 'See in:',
+      changeLanguageToLabel: 'Cambiar idioma a:',
     },
   },
 };
