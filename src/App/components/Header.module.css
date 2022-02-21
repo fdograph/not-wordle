@@ -3,9 +3,9 @@
 }
 
 .title {
-    @apply text-4xl font-bold;
+    @apply text-2xl md:text-4xl font-bold;
 }
 
 .languageButton {
-    @apply block p-1 px-2 bg-amber-300 text-slate-900 text-sm;
+    @apply block p-0.5 px-1 md:p-1 md:px-2 bg-amber-300 text-slate-900 text-sm;
 }

@@ -1,0 +1,23 @@
+.finalBoard {
+    @apply flex flex-col gap-2;
+}
+
+.title {
+    @apply text-2xl font-bold uppercase;
+}
+
+.bodyText {
+    @apply text-base;
+}
+
+.actionsWrapper {
+    @apply flex flex-col md:flex-row gap-3;
+}
+
+.copyButton {
+    @apply block p-2 px-4 bg-lime-600 hover:bg-lime-700 text-center w-full;
+}
+
+.tweetButton {
+    @apply block p-2 px-4 bg-blue-500 hover:bg-blue-600 text-center w-full;
+}

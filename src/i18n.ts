@@ -8,17 +8,31 @@ const resources = {
   en: {
     translation: {
       appTitle: 'This is NOT Wordle',
-      winnerText: 'You are a winner baby!',
       changeLanguageToText: 'Ver en',
       changeLanguageToLabel: 'Change language to:',
+      tweetBody: 'I just completed a NOT Wordle!',
+      youAreaWinner: 'You are the Winner!',
+      youAreaLooser: 'You Loose :(',
+      finalBoardBodyCopy:
+        'Thank you for playing! You can try again by refreshing this page',
+      copyToClipboard: 'Copy results to clipboard',
+      tweetYourScore: 'Tweet your score!',
+      copySuccessful: 'Your score was copied to your clipboard',
     },
   },
   es: {
     translation: {
       appTitle: 'Esto NO es Wordle',
-      winnerText: 'Felicitaciones! Ganaste!',
       changeLanguageToText: 'See in',
       changeLanguageToLabel: 'Cambiar idioma a:',
+      tweetBody: 'Acabo de completar este NO Wordle!',
+      youAreaWinner: 'Has Ganado!',
+      youAreaLooser: 'Perdiste el juego :(',
+      finalBoardBodyCopy:
+        'Gracias por jugar! Puedes intentar nuevamente refrescando la página',
+      copyToClipboard: 'Copia tus resultados',
+      tweetYourScore: 'Twitea tus resultados!',
+      copySuccessful: 'Resultados copiados',
     },
   },
 };

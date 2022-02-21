@@ -3,20 +3,7 @@ import React, { useMemo } from 'react';
 import Styled from './Keyboard.module.css';
 import classNames from 'classnames';
 import { useQueryString } from '../../hooks/useQueryString';
-
-const langKeyboard = {
-  en: [
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['Enter', 'x', 'c', 'v', 'b', 'n', 'm', 'Backspace'],
-  ],
-
-  es: [
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ñ'],
-    ['Enter', 'x', 'c', 'v', 'b', 'n', 'm', 'Borrar'],
-  ],
-};
+import { langKeyboard } from '../logic';
 
 interface KeyProps {
   value: string;
@@ -83,18 +70,16 @@ export const Keyboard: React.FC<KeyboardProps> = ({
 
     return keyMatrix.map((row) => (
       <div key={row.join('')}>
-        {row.map((keyVal) => {
-          return (
-            <Key
-              key={keyVal}
-              value={keyVal}
-              isCorrect={status.get(keyVal.toUpperCase())?.isCorrect}
-              isFound={status.get(keyVal.toUpperCase())?.isFound}
-              isNotFound={status.get(keyVal.toUpperCase())?.isNotFound}
-              onClick={onKeyPress}
-            />
-          );
-        })}
+        {row.map((keyVal) => (
+          <Key
+            key={keyVal}
+            value={keyVal}
+            isCorrect={status.get(keyVal.toUpperCase())?.isCorrect}
+            isFound={status.get(keyVal.toUpperCase())?.isFound}
+            isNotFound={status.get(keyVal.toUpperCase())?.isNotFound}
+            onClick={onKeyPress}
+          />
+        ))}
       </div>
     ));
   }, [lang, onKeyPress, status]);

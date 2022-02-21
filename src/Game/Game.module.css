@@ -3,7 +3,7 @@
 }
 
 .gameBoard.hasWinner .play {
-    @apply opacity-50;
+    @apply opacity-30;
 }
 .gameBoard.hasWinner .winnerPlay {
     @apply opacity-100;
@@ -11,4 +11,8 @@
 
 .keyboardArea {
     @apply flex justify-center;
+}
+
+.finalBoardArea {
+    @apply flex justify-center p-2;
 }

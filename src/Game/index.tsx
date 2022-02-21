@@ -1,28 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
 
 import Styles from './Game.module.css';
 import { WordBoard } from './components/WordBoard';
 import { Keyboard } from './components/Keyboard';
-import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
+import { buildTweetText, isAllowedLetter, selectWord } from './logic';
+import { FinalBoard } from './components/FinalBoard';
 
-// only single letters allowed (a-z|A-Z)
-const isAllowedLetter = (s: string) => s.length === 1 && /[a-zñ]/gi.test(s);
-
-const selectWord = (list: string[]) => {
-  const word = list[~~(list.length * Math.random())];
-  const chars = word.split('').reduce((map, char) => {
-    const count = map.get(char) ?? 0;
-
-    map.set(char, count + 1);
-    return map;
-  }, new Map<string, number>());
-
-  return {
-    word,
-    chars,
-  };
-};
+const MAX_TURNS = 6;
 
 interface GameProps {
   wordList: string[];
@@ -32,6 +18,7 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
   const { t } = useTranslation();
   const selectedWord = useMemo(() => selectWord(wordList), [wordList]);
   const [plays, setPlays] = useState<string[][]>([]);
+  const [isLooser, setIsLooser] = useState<boolean>(false);
   const [isWinner, setIsWinner] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
   const [playerGuess, setPlayerGuess] = useState<string[]>([]);
@@ -58,13 +45,16 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
       setHasError(true);
     }
   }, [playerGuess, plays, wordList]);
+
   const checkWin = useCallback(() => {
-    const isWinner = playerGuess.join('') === selectedWord.word;
-    setIsWinner(isWinner);
-    if (isWinner) {
-      alert(t('winnerText'));
+    if (playerGuess.join('') === selectedWord.word) {
+      setIsWinner(true);
+      setIsLooser(false);
+    } else if (plays.length + 1 >= MAX_TURNS) {
+      setIsWinner(false);
+      setIsLooser(true);
     }
-  }, [playerGuess, selectedWord.word, t]);
+  }, [playerGuess, plays, selectedWord.word]);
 
   const onInput = useCallback(
     (keyInput: string) => {
@@ -91,10 +81,7 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
 
   useEffect(() => {
     window.addEventListener('keyup', onKeyUp);
-
-    return () => {
-      window.removeEventListener('keyup', onKeyUp);
-    };
+    return () => window.removeEventListener('keyup', onKeyUp);
   }, [onKeyUp]);
 
   console.log(selectedWord);
@@ -123,7 +110,7 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
             isWinner={idx === plays.length - 1 && isWinner}
           />
         ))}
-        {plays.length <= 5 && !isWinner ? (
+        {plays.length <= MAX_TURNS - 1 && !isWinner ? (
           <WordBoard
             wordLength={wordsLength}
             selectedWord={selectedWord.word}
@@ -135,13 +122,24 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
           />
         ) : null}
       </div>
-      <div className={Styles.keyboardArea}>
-        <Keyboard
-          onKeyPress={onInput}
-          plays={plays}
-          selectedWord={selectedWord.word}
-        />
-      </div>
+      {isWinner || isLooser ? (
+        <div className={Styles.finalBoardArea}>
+          <FinalBoard
+            isWinner={isWinner}
+            plays={plays}
+            word={selectedWord.word}
+            charMap={selectedWord.chars}
+          />
+        </div>
+      ) : (
+        <div className={Styles.keyboardArea}>
+          <Keyboard
+            onKeyPress={onInput}
+            plays={plays}
+            selectedWord={selectedWord.word}
+          />
+        </div>
+      )}
     </>
   );
 };
