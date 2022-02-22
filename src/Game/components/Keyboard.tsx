@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import Styled from './Keyboard.module.css';
 import classNames from 'classnames';
 import { useQueryString } from '../../hooks/useQueryString';
-import { langKeyboard } from '../logic';
+import { langKeyboard, mapCorrect } from '../logic';
 
 interface KeyProps {
   value: string;
@@ -52,15 +52,21 @@ export const Keyboard: React.FC<KeyboardProps> = ({
       { isFound: boolean; isNotFound: boolean; isCorrect: boolean }
     >();
 
-    plays.forEach((chars) =>
-      chars.forEach((c, idx) => {
+    const corrects = new Map<string, number>(
+      plays
+        .map((chars) => [...mapCorrect(selectedWord, chars).entries()])
+        .flat(1)
+    );
+
+    plays.forEach((chars) => {
+      return chars.forEach((c, idx) => {
         statusMap.set(c, {
           isFound: selectedWord.indexOf(c.toUpperCase()) !== -1,
           isNotFound: selectedWord.indexOf(c.toUpperCase()) === -1,
-          isCorrect: selectedWord[idx] === c.toUpperCase(),
+          isCorrect: corrects.get(c) !== undefined,
         });
-      })
-    );
+      });
+    });
 
     return statusMap;
   }, [plays, selectedWord]);

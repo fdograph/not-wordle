@@ -12,7 +12,6 @@ export const langKeyboard = {
   ],
 };
 
-// only single letters allowed (a-z|A-Z)
 export const isAllowedLetter = (s: string) =>
   s.length === 1 && /[a-zñ]/gi.test(s);
 
@@ -70,7 +69,7 @@ export const getStatus = (
     return 'found';
   }
 
-  return 'neutral';
+  return 'notFound';
 };
 
 export const mapGuess = (
