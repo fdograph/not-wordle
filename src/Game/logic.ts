@@ -123,7 +123,7 @@ export const buildTweetText = (
     })
     .join('\n');
 
-  return bodyText + '\n\n' + playBlocks;
+  return bodyText + '\n\n' + playBlocks + '\n\n' + window.location.href;
 };
 
 export const copyToClipboard = (text: string) =>

@@ -12,7 +12,7 @@ const WORDS_LENGTH = 5;
 
 const fetchWordsList = async (lang: string): Promise<string[]> => {
   const wordsJson = lang === 'es' ? '/data/es.json' : '/data/en.json';
-  return fetch(`${window.location.pathname}${wordsJson}`)
+  return fetch(`${window.location.origin}${wordsJson}`)
     .then((r) => r.json())
     .then((list) => list.words.map((w: string) => w.toUpperCase()));
 };
