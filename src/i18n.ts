@@ -5,8 +5,8 @@ const resources = {
   en: {
     translation: {
       appTitle: 'This is NOT Wordle',
-      changeLanguageToText: 'Ver en',
-      changeLanguageToLabel: 'Change language to:',
+      changeLanguageToText: 'ES',
+      changeLanguageToLabel: 'Jugar en Español',
       tweetBody: 'I just completed a NOT Wordle! {{turn}}/{{maxTurns}}',
       youAreaWinner: 'You are the Winner!',
       youAreaLooser: 'You Loose :(',
@@ -21,8 +21,8 @@ const resources = {
   es: {
     translation: {
       appTitle: 'Esto NO es Wordle',
-      changeLanguageToText: 'See in',
-      changeLanguageToLabel: 'Cambiar idioma a:',
+      changeLanguageToText: 'EN',
+      changeLanguageToLabel: 'Play in English',
       tweetBody: 'Acabo de completar este NO Wordle! {{turn}}/{{maxTurns}}',
       youAreaWinner: 'Has Ganado!',
       youAreaLooser: 'Perdiste el juego :(',

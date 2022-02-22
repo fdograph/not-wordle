@@ -19,20 +19,22 @@ export const Header: React.FC = () => {
     }
   }, [lang]);
 
-  const targetLang = lang === 'es' ? 'English 🇬🇧' : 'Español 🇪🇸';
+  const targetLang = lang === 'es' ? '🇬🇧' : '🇪🇸';
   const btnText = `${t('changeLanguageToText')} ${targetLang}`;
   const btnLabel = `${t('changeLanguageToLabel')} ${targetLang}`;
 
   return (
     <header className={Styles.header}>
-      <h1 className={Styles.title}>{t('appTitle')}</h1>
-      <button
-        className={Styles.languageButton}
-        onClick={changeLang}
-        title={btnLabel}
-      >
-        {btnText}
-      </button>
+      <div className={Styles.container}>
+        <h1 className={Styles.title}>{t('appTitle')}</h1>
+        <button
+          className={Styles.languageButton}
+          onClick={changeLang}
+          title={btnLabel}
+        >
+          {btnText}
+        </button>
+      </div>
     </header>
   );
 };
