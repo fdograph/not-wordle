@@ -7,7 +7,7 @@ const resources = {
       appTitle: 'This is NOT Wordle',
       changeLanguageToText: 'Ver en',
       changeLanguageToLabel: 'Change language to:',
-      tweetBody: 'I just completed a NOT Wordle!',
+      tweetBody: 'I just completed a NOT Wordle! {{turn}}/{{maxTurns}}',
       youAreaWinner: 'You are the Winner!',
       youAreaLooser: 'You Loose :(',
       finalBoardBodyCopy:
@@ -23,7 +23,7 @@ const resources = {
       appTitle: 'Esto NO es Wordle',
       changeLanguageToText: 'See in',
       changeLanguageToLabel: 'Cambiar idioma a:',
-      tweetBody: 'Acabo de completar este NO Wordle!',
+      tweetBody: 'Acabo de completar este NO Wordle! {{turn}}/{{maxTurns}}',
       youAreaWinner: 'Has Ganado!',
       youAreaLooser: 'Perdiste el juego :(',
       finalBoardBodyCopy:

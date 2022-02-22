@@ -17,7 +17,12 @@ export const FinalBoard: React.FC<FinalBoardProps> = ({
   plays,
 }) => {
   const { t } = useTranslation();
-  const tweetText = buildTweetText(t('tweetBody'), plays, word, charMap);
+  const tweetText = buildTweetText(
+    t('tweetBody', { turn: plays.length, maxTurns: 6 }),
+    plays,
+    word,
+    charMap
+  );
 
   return (
     <div className={Styles.finalBoard}>
