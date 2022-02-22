@@ -1,8 +1,10 @@
 import React from 'react';
 
 import Styles from './Footer.module.css';
+import { useTranslation } from 'react-i18next';
 
 export const Footer: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <footer className={Styles.footer}>
       <a
@@ -11,7 +13,7 @@ export const Footer: React.FC = () => {
         rel="external nofollow noreferrer"
         href="https://github.com/fdograph/not-wordle"
       >
-        View source code on Github
+        {t('viewOnGithub')}
       </a>
     </footer>
   );

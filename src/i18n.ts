@@ -18,6 +18,7 @@ const resources = {
       copyToClipboard: 'Copy results to clipboard',
       tweetYourScore: 'Tweet your score!',
       copySuccessful: 'Your score was copied to your clipboard',
+      viewOnGithub: 'View code on Github',
     },
   },
   es: {
@@ -33,6 +34,7 @@ const resources = {
       copyToClipboard: 'Copia tus resultados',
       tweetYourScore: 'Twitea tus resultados!',
       copySuccessful: 'Resultados copiados',
+      viewOnGithub: 'Ver código en Github',
     },
   },
 };
