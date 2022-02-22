@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 
 import Styles from './Game.module.css';
 import { WordBoard } from './components/WordBoard';
 import { Keyboard } from './components/Keyboard';
-import { buildTweetText, isAllowedLetter, selectWord } from './logic';
+import { isAllowedLetter, selectWord } from './logic';
 import { FinalBoard } from './components/FinalBoard';
 
 const MAX_TURNS = 6;
@@ -15,11 +14,11 @@ interface GameProps {
   wordsLength: number;
 }
 export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
-  const { t } = useTranslation();
   const selectedWord = useMemo(() => selectWord(wordList), [wordList]);
   const [plays, setPlays] = useState<string[][]>([]);
-  const [isLooser, setIsLooser] = useState<boolean>(false);
-  const [isWinner, setIsWinner] = useState<boolean>(false);
+  const isWinner =
+    plays.length > 0 && plays[plays.length - 1].join('') === selectedWord.word;
+  const isLooser = plays.length === MAX_TURNS && !isWinner;
   const [hasError, setHasError] = useState<boolean>(false);
   const [playerGuess, setPlayerGuess] = useState<string[]>([]);
   const addChar = useCallback(
@@ -46,16 +45,6 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
     }
   }, [playerGuess, plays, wordList]);
 
-  const checkWin = useCallback(() => {
-    if (playerGuess.join('') === selectedWord.word) {
-      setIsWinner(true);
-      setIsLooser(false);
-    } else if (plays.length + 1 >= MAX_TURNS) {
-      setIsWinner(false);
-      setIsLooser(true);
-    }
-  }, [playerGuess, plays, selectedWord.word]);
-
   const onInput = useCallback(
     (keyInput: string) => {
       if (isAllowedLetter(keyInput) && playerGuess.length < wordsLength) {
@@ -67,10 +56,9 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
         deleteChar();
       } else if (keyInput === 'Enter' && playerGuess.length === wordsLength) {
         commitPlay();
-        checkWin();
       }
     },
-    [addChar, checkWin, commitPlay, deleteChar, playerGuess.length, wordsLength]
+    [addChar, commitPlay, deleteChar, playerGuess.length, wordsLength]
   );
   const onKeyUp = useCallback(
     (ev: KeyboardEvent) => {
