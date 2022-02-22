@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 
 import Styles from './App.module.css';
 import { useQueryLang } from '../hooks/useQueryLang';
+import { Footer } from './components/Footer';
 
 const WORDS_LENGTH = 5;
 
@@ -37,6 +38,7 @@ const App: React.FC = () => {
     <>
       <Header />
       <Game wordsLength={WORDS_LENGTH} wordList={query.data!} />
+      <Footer />
     </>
   );
 };

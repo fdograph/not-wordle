@@ -1,0 +1,7 @@
+.footer {
+    @apply flex py-8 px-2 items-center justify-center text-center;
+}
+
+.footerLink {
+    @apply block text-sm underline hover:no-underline;
+}
