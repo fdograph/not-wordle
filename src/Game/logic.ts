@@ -98,6 +98,13 @@ export const mapGuess = (
   });
 };
 
+const statusBlockMap = {
+  correct: '🟩',
+  found: '🟨',
+  notFound: '⬛',
+  neutral: '⬛',
+};
+
 export const buildTweetText = (
   bodyText: string,
   plays: string[][],
@@ -108,16 +115,7 @@ export const buildTweetText = (
     .map((row) => {
       const statusMap = mapGuess(row, word, chars);
       return row
-        .map((c, idx) => {
-          switch (statusMap[idx].status) {
-            case 'correct':
-              return '🟩';
-            case 'found':
-              return '🟨';
-            default:
-              return '⬛';
-          }
-        })
+        .map((c, idx) => statusBlockMap[statusMap[idx].status])
         .join('');
     })
     .join('\n');
