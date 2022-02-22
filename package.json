@@ -1,6 +1,6 @@
 {
   "name": "@fdograph/not-wordle",
-  "homepage": "https://fdograph.github.io/not-wordle",
+  "homepage": "https://nowordle.silvamuller.rocks/",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
