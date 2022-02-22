@@ -7,7 +7,7 @@
 }
 
 .key {
-    @apply p-2 md:px-4 capitalize md:text-xl bg-slate-700 hover:bg-slate-600 active:bg-slate-400 min-w-[30px];
+    @apply p-1.5 md:px-4 capitalize md:text-xl bg-slate-700 hover:bg-slate-600 active:bg-slate-400 min-w-[27px];
 }
 
 .key.found {

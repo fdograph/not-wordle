@@ -2,13 +2,13 @@ export const langKeyboard = {
   en: [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['Enter', 'x', 'c', 'v', 'b', 'n', 'm', 'Backspace'],
+    ['Enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Backspace'],
   ],
 
   es: [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ñ'],
-    ['Enter', 'x', 'c', 'v', 'b', 'n', 'm', 'Borrar'],
+    ['Enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Borrar'],
   ],
 };
 
