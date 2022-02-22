@@ -72,7 +72,7 @@
 }
 
 .letterBox.withStatus.found span:last-child {
-    @apply bg-amber-300;
+    @apply bg-amber-300 text-slate-900;
 }
 
 .letterBox.withStatus.correct span:last-child {

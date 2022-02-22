@@ -11,7 +11,7 @@
 }
 
 .key.found {
-    @apply bg-amber-300;
+    @apply bg-amber-300 text-slate-900;
 }
 .key.notFound {
     @apply bg-black;
