@@ -1,14 +1,28 @@
-export const langKeyboard = {
+interface KeyItem {
+  val: string;
+  label: string;
+}
+
+interface KeyboardMatrix {
+  en: KeyItem[][];
+  es: KeyItem[][];
+}
+
+const keyMapper = (key: string): KeyItem => ({
+  val: key,
+  label: key === 'Enter' ? '⏎' : key === 'Backspace' ? '⌫' : key,
+});
+export const langKeyboard: KeyboardMatrix = {
   en: [
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['Enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Backspace'],
+    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'].map(keyMapper),
+    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'].map(keyMapper),
+    ['Enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Backspace'].map(keyMapper),
   ],
 
   es: [
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ñ'],
-    ['Enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Borrar'],
+    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'].map(keyMapper),
+    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ñ'].map(keyMapper),
+    ['Enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Backspace'].map(keyMapper),
   ],
 };
 

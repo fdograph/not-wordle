@@ -7,6 +7,7 @@ import { langKeyboard, mapCorrect } from '../logic';
 
 interface KeyProps {
   value: string;
+  label: string;
   isFound?: boolean;
   isNotFound?: boolean;
   isCorrect?: boolean;
@@ -14,6 +15,7 @@ interface KeyProps {
 }
 const Key: React.FC<KeyProps> = ({
   value,
+  label,
   isFound,
   isNotFound,
   isCorrect,
@@ -30,7 +32,7 @@ const Key: React.FC<KeyProps> = ({
       onClick={() => onClick(value)}
       aria-label={`${value} key`}
     >
-      {value}
+      {label}
     </button>
   );
 };
@@ -78,11 +80,12 @@ export const Keyboard: React.FC<KeyboardProps> = ({
       <div key={row.join('')}>
         {row.map((keyVal) => (
           <Key
-            key={keyVal}
-            value={keyVal}
-            isCorrect={status.get(keyVal.toUpperCase())?.isCorrect}
-            isFound={status.get(keyVal.toUpperCase())?.isFound}
-            isNotFound={status.get(keyVal.toUpperCase())?.isNotFound}
+            key={keyVal.val}
+            value={keyVal.val}
+            label={keyVal.label}
+            isCorrect={status.get(keyVal.val.toUpperCase())?.isCorrect}
+            isFound={status.get(keyVal.val.toUpperCase())?.isFound}
+            isNotFound={status.get(keyVal.val.toUpperCase())?.isNotFound}
             onClick={onKeyPress}
           />
         ))}
