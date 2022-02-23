@@ -25,6 +25,8 @@ const Key: React.FC<KeyProps> = ({
     <button
       className={classNames({
         [Styled.key]: true,
+        [Styled.enter]: value === 'ENTER',
+        [Styled.backspace]: value === 'BACKSPACE',
         [Styled.correct]: isCorrect,
         [Styled.found]: isFound,
         [Styled.notFound]: isNotFound,
@@ -83,9 +85,9 @@ export const Keyboard: React.FC<KeyboardProps> = ({
             key={keyVal.val}
             value={keyVal.val}
             label={keyVal.label}
-            isCorrect={status.get(keyVal.val.toUpperCase())?.isCorrect}
-            isFound={status.get(keyVal.val.toUpperCase())?.isFound}
-            isNotFound={status.get(keyVal.val.toUpperCase())?.isNotFound}
+            isCorrect={status.get(keyVal.val)?.isCorrect}
+            isFound={status.get(keyVal.val)?.isFound}
+            isNotFound={status.get(keyVal.val)?.isNotFound}
             onClick={onKeyPress}
           />
         ))}

@@ -10,6 +10,14 @@
     @apply p-2 md:px-4 capitalize md:text-xl bg-slate-700 hover:bg-slate-600 active:bg-slate-400 min-w-[30px];
 }
 
+.key.enter {
+    @apply bg-blue-500 hover:bg-blue-600;
+}
+
+.key.backspace {
+    @apply bg-orange-600 hover:bg-orange-700;
+}
+
 .key.found {
     @apply bg-amber-300 text-slate-900;
 }

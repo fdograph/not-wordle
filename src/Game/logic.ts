@@ -9,7 +9,7 @@ interface KeyboardMatrix {
 }
 
 const keyMapper = (key: string): KeyItem => ({
-  val: key,
+  val: key.toUpperCase(),
   label: key === 'Enter' ? '⏎' : key === 'Backspace' ? '⌫' : key,
 });
 export const langKeyboard: KeyboardMatrix = {

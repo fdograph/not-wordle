@@ -49,12 +49,9 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
     (keyInput: string) => {
       if (isAllowedLetter(keyInput) && playerGuess.length < wordsLength) {
         addChar(keyInput);
-      } else if (
-        (keyInput === 'Backspace' || keyInput === 'Borrar') &&
-        playerGuess.length >= 1
-      ) {
+      } else if (keyInput === 'BACKSPACE' && playerGuess.length >= 1) {
         deleteChar();
-      } else if (keyInput === 'Enter' && playerGuess.length === wordsLength) {
+      } else if (keyInput === 'ENTER' && playerGuess.length === wordsLength) {
         commitPlay();
       }
     },
@@ -62,7 +59,7 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
   );
   const onKeyUp = useCallback(
     (ev: KeyboardEvent) => {
-      onInput(ev.key);
+      onInput(ev.key.toUpperCase());
     },
     [onInput]
   );
