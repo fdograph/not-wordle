@@ -2,24 +2,22 @@ import React, { useCallback } from 'react';
 
 import Styles from './Header.module.css';
 import { useTranslation } from 'react-i18next';
-import { useQueryString } from '../../hooks/useQueryString';
 
 export const Header: React.FC = () => {
-  const { t } = useTranslation();
-  const { lang } = useQueryString<{ lang: string }>(window.location.search);
+  const { t, i18n } = useTranslation();
 
   const changeLang = useCallback(() => {
     const currentUrl = window.location.search
       ? window.location.href.replace(window.location.search, '')
       : window.location.href;
-    if (lang === 'es') {
+    if (i18n.language === 'es') {
       window.location.href = currentUrl;
     } else {
       window.location.href = `${currentUrl}?lang=es`;
     }
-  }, [lang]);
+  }, [i18n.language]);
 
-  const targetLang = lang === 'es' ? '🇬🇧' : '🇪🇸';
+  const targetLang = i18n.language === 'es' ? '🇬🇧' : '🇪🇸';
   const btnText = `${t('changeLanguageToText')} ${targetLang}`;
   const btnLabel = `${t('changeLanguageToLabel')} ${targetLang}`;
 

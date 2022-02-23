@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 
 import Styled from './Keyboard.module.css';
 import classNames from 'classnames';
-import { useQueryString } from '../../hooks/useQueryString';
 import { langKeyboard, mapCorrect } from '../logic';
+import { useTranslation } from 'react-i18next';
 
 interface KeyProps {
   value: string;
@@ -49,7 +49,7 @@ export const Keyboard: React.FC<KeyboardProps> = ({
   plays,
   selectedWord,
 }) => {
-  const { lang } = useQueryString(window.location.search);
+  const { i18n } = useTranslation();
   const status = useMemo(() => {
     const statusMap = new Map<
       string,
@@ -76,10 +76,11 @@ export const Keyboard: React.FC<KeyboardProps> = ({
   }, [plays, selectedWord]);
 
   const keyRows = useMemo(() => {
-    const keyMatrix = lang === 'es' ? langKeyboard.es : langKeyboard.en;
+    const keyMatrix =
+      i18n.language === 'es' ? langKeyboard.es : langKeyboard.en;
 
-    return keyMatrix.map((row) => (
-      <div key={row.join('')}>
+    return keyMatrix.map((row, i) => (
+      <div key={i}>
         {row.map((keyVal) => (
           <Key
             key={keyVal.val}
@@ -93,7 +94,7 @@ export const Keyboard: React.FC<KeyboardProps> = ({
         ))}
       </div>
     ));
-  }, [lang, onKeyPress, status]);
+  }, [i18n.language, onKeyPress, status]);
 
   return <div className={Styled.keyboard}>{keyRows}</div>;
 };

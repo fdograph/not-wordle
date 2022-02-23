@@ -5,8 +5,8 @@ import { Game } from '../Game';
 import { useQuery } from 'react-query';
 
 import Styles from './App.module.css';
-import { useQueryLang } from '../hooks/useQueryLang';
 import { Footer } from './components/Footer';
+import { useTranslation } from 'react-i18next';
 
 const WORDS_LENGTH = 5;
 
@@ -18,10 +18,10 @@ const fetchWordsList = async (lang: string): Promise<string[]> => {
 };
 
 const App: React.FC = () => {
-  const { lang } = useQueryLang(window.location.search);
+  const { i18n } = useTranslation();
   const query = useQuery<string[]>(
-    ['wordsList', lang],
-    () => fetchWordsList(lang),
+    ['wordsList', i18n.language],
+    () => fetchWordsList(i18n.language),
     {
       refetchIntervalInBackground: false,
       refetchOnMount: false,

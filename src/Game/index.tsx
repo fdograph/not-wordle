@@ -69,8 +69,6 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
     return () => window.removeEventListener('keyup', onKeyUp);
   }, [onKeyUp]);
 
-  console.log(selectedWord);
-
   return (
     <>
       <div
