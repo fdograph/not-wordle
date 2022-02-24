@@ -6,6 +6,7 @@ import { WordBoard } from './components/WordBoard';
 import { Keyboard } from './components/Keyboard';
 import { isAllowedLetter, selectWord } from './logic';
 import { FinalBoard } from './components/FinalBoard';
+import { useTranslation } from 'react-i18next';
 
 const MAX_TURNS = 6;
 
@@ -14,7 +15,11 @@ interface GameProps {
   wordsLength: number;
 }
 export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
-  const selectedWord = useMemo(() => selectWord(wordList), [wordList]);
+  const { i18n } = useTranslation();
+  const selectedWord = useMemo(
+    () => selectWord(wordList, i18n.language),
+    [i18n.language, wordList]
+  );
   const [plays, setPlays] = useState<string[][]>([]);
   const isWinner =
     plays.length > 0 && plays[plays.length - 1].join('') === selectedWord.word;
@@ -45,6 +50,12 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
     }
   }, [playerGuess, plays, wordList]);
 
+  const reset = useCallback(() => {
+    setPlays([]);
+    setHasError(false);
+    setPlayerGuess([]);
+  }, []);
+
   const onInput = useCallback(
     (keyInput: string) => {
       if (isAllowedLetter(keyInput) && playerGuess.length < wordsLength) {
@@ -65,9 +76,15 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
   );
 
   useEffect(() => {
+    i18n.on('languageChanged', reset);
     window.addEventListener('keyup', onKeyUp);
-    return () => window.removeEventListener('keyup', onKeyUp);
-  }, [onKeyUp]);
+    return () => {
+      window.removeEventListener('keyup', onKeyUp);
+      i18n.off('languageChanged', reset);
+    };
+  }, [i18n, onKeyUp, reset]);
+
+  console.log(selectedWord);
 
   return (
     <>

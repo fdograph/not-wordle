@@ -29,7 +29,7 @@ export const langKeyboard: KeyboardMatrix = {
 export const isAllowedLetter = (s: string) =>
   s.length === 1 && /[a-zñ]/gi.test(s);
 
-export const selectWord = (list: string[]) => {
+export const selectWord = (list: string[], language: string) => {
   const word = list[~~(list.length * Math.random())];
   const chars = word.split('').reduce((map, char) => {
     const count = map.get(char) ?? 0;
@@ -39,6 +39,7 @@ export const selectWord = (list: string[]) => {
   }, new Map<string, number>());
 
   return {
+    lang: language,
     word,
     chars,
   };

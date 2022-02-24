@@ -7,15 +7,12 @@ export const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
 
   const changeLang = useCallback(() => {
-    const currentUrl = window.location.search
-      ? window.location.href.replace(window.location.search, '')
-      : window.location.href;
     if (i18n.language === 'es') {
-      window.location.href = currentUrl;
+      i18n.changeLanguage('en');
     } else {
-      window.location.href = `${currentUrl}?lang=es`;
+      i18n.changeLanguage('es');
     }
-  }, [i18n.language]);
+  }, [i18n]);
 
   const targetLangFlag = i18n.language === 'es' ? '🇬🇧' : '🇪🇸';
   const btnText = t('changeLanguageToText', { targetLangFlag });

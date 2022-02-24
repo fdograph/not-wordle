@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import { getParams } from './hooks/useQueryString';
 
 const resources = {
@@ -37,13 +38,17 @@ const resources = {
   },
 };
 
-const queryLang = getParams<{ lang: string }>(window.location.search).lang;
-
 i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(LanguageDetector)
+  .use(initReactI18next)
   .init({
     resources,
-    lng: queryLang === 'es' ? 'es' : 'en',
+    detection: {
+      htmlTag: document.documentElement,
+      lookupQuerystring: 'lang',
+    },
+    // lookupQuerystring: 'lang',
+    // lng: queryLang === 'es' ? 'es' : 'en',
     interpolation: {
       escapeValue: false,
     },
