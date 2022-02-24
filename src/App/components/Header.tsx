@@ -17,9 +17,9 @@ export const Header: React.FC = () => {
     }
   }, [i18n.language]);
 
-  const targetLang = i18n.language === 'es' ? '🇬🇧' : '🇪🇸';
-  const btnText = `${t('changeLanguageToText')} ${targetLang}`;
-  const btnLabel = `${t('changeLanguageToLabel')} ${targetLang}`;
+  const targetLangFlag = i18n.language === 'es' ? '🇬🇧' : '🇪🇸';
+  const btnText = t('changeLanguageToText', { targetLangFlag });
+  const btnLabel = t('changeLanguageToLabel', { targetLangFlag });
 
   return (
     <header className={Styles.header}>

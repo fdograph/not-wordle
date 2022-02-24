@@ -6,7 +6,7 @@ const resources = {
   en: {
     translation: {
       appTitle: 'This is NOT Wordle',
-      changeLanguageToText: 'ES',
+      changeLanguageToText: 'ES {{targetLangFlag}}',
       changeLanguageToLabel: 'Jugar en Español',
       tweetBody: 'I just completed a NOT Wordle! {{turn}}/{{maxTurns}}',
       youAreaWinner: 'You are the Winner!',
@@ -22,7 +22,7 @@ const resources = {
   es: {
     translation: {
       appTitle: 'Esto NO es Wordle',
-      changeLanguageToText: 'EN',
+      changeLanguageToText: 'EN {{targetLangFlag}}',
       changeLanguageToLabel: 'Play in English',
       tweetBody: 'Acabo de completar este NO Wordle! {{turn}}/{{maxTurns}}',
       youAreaWinner: 'Has Ganado!',
