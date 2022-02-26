@@ -29,5 +29,5 @@
     @apply bg-black;
 }
 .key.correct {
-    @apply bg-lime-600;
+    @apply bg-lime-600 text-slate-50;
 }
