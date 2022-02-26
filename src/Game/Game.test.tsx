@@ -8,11 +8,7 @@ import { processWord } from './logic';
 describe('Game Component', () => {
   const selectedWord = 'ALERT';
   const validWords = ['QUERY', 'HEART', 'BLISS', 'COOLS'];
-  const selection = processWord(
-    [selectedWord, ...validWords],
-    'en',
-    selectedWord
-  );
+  const selection = processWord([selectedWord, ...validWords], selectedWord);
 
   const baseProps = {
     word: selection.word,
@@ -76,8 +72,7 @@ describe('Game Component', () => {
       fireEvent.click(screen.getByTitle('ENTER'));
     });
 
-    const plays = screen.getAllByTitle('playerGuess');
-    expect(plays).toHaveLength(2);
+    expect(screen.getAllByTitle('playerGuess')).toHaveLength(2);
     expect(screen.getAllByTitle('emptyPlayerGuess')).toHaveLength(1);
   });
 
@@ -93,8 +88,9 @@ describe('Game Component', () => {
       fireEvent.click(screen.getByTitle('ENTER'));
     });
 
-    const plays = screen.getAllByTitle('playerGuess');
-    expect(plays).toHaveLength(baseProps.maxTurns);
+    expect(screen.getAllByTitle('playerGuess')).toHaveLength(
+      baseProps.maxTurns
+    );
     expect(screen.queryAllByTitle('emptyPlayerGuess')).toHaveLength(0);
   });
 
@@ -117,8 +113,7 @@ describe('Game Component', () => {
       fireEvent.click(screen.getByTitle('ENTER'));
     });
 
-    const plays = screen.getAllByTitle('playerGuess');
-    expect(plays).toHaveLength(2);
+    expect(screen.getAllByTitle('playerGuess')).toHaveLength(2);
     expect(screen.queryAllByTitle('emptyPlayerGuess')).toHaveLength(1);
   });
 

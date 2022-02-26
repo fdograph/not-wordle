@@ -32,9 +32,8 @@ const App: React.FC = () => {
     }
   );
   const selection = useMemo(
-    () =>
-      query.isLoading ? null : processWord(query.data || [], i18n.language),
-    [i18n.language, query.data, query.isLoading]
+    () => (query.isLoading ? null : processWord(query.data || [])),
+    [query.data, query.isLoading]
   );
 
   return query.isLoading || selection === null ? (

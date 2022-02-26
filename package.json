@@ -26,6 +26,8 @@
     },
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
+      "!src/i18n.ts",
+      "!src/index.tsx",
       "!<rootDir>/node_modules/"
     ],
     "coverageReporters": [

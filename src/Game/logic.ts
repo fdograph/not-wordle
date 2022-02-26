@@ -37,11 +37,7 @@ export const langKeyboard: KeyboardMatrix = {
 export const isAllowedLetter = (s: string) =>
   s.length === 1 && /[a-zñ]/gi.test(s);
 
-export const processWord = (
-  list: string[],
-  language: string,
-  preselection?: string
-) => {
+export const processWord = (list: string[], preselection?: string) => {
   const word =
     preselection === undefined
       ? list[~~(list.length * Math.random())]
@@ -54,7 +50,6 @@ export const processWord = (
   }, new Map<string, number>());
 
   return {
-    lang: language,
     wordSet: new Set(list),
     word,
     chars,
