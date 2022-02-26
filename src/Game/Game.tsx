@@ -1,61 +1,58 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import Styles from './Game.module.css';
 import { WordBoard } from './components/WordBoard';
 import { Keyboard } from './components/Keyboard';
-import { isAllowedLetter, selectWord } from './logic';
+import { isAllowedLetter } from './logic';
 import { FinalBoard } from './components/FinalBoard';
 import { useTranslation } from 'react-i18next';
 
-const MAX_TURNS = 6;
-
 interface GameProps {
-  wordList: string[];
+  word: string;
+  wordsSet: Set<string>;
+  wordCharMap: Map<string, number>;
   wordsLength: number;
+  maxTurns: number;
 }
-export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
+export const Game: React.FC<GameProps> = ({
+  word,
+  wordsSet,
+  wordCharMap,
+  wordsLength,
+  maxTurns,
+}) => {
   const { i18n } = useTranslation();
-  const selectedWord = useMemo(
-    () => selectWord(wordList, i18n.language),
-    [i18n.language, wordList]
-  );
-  const [plays, setPlays] = useState<string[][]>([]);
-  const isWinner =
-    plays.length > 0 && plays[plays.length - 1].join('') === selectedWord.word;
-  const isLooser = plays.length === MAX_TURNS && !isWinner;
   const [hasError, setHasError] = useState<boolean>(false);
+  const [plays, setPlays] = useState<string[][]>([]);
   const [playerGuess, setPlayerGuess] = useState<string[]>([]);
+  const isWinner =
+    plays.length > 0 && plays[plays.length - 1].join('') === word;
+  const isLooser = plays.length === maxTurns && !isWinner;
   const addChar = useCallback(
     (char: string) => {
-      const update = [...playerGuess];
-      update.push(char.toUpperCase());
-      setPlayerGuess(update);
+      setPlayerGuess([...playerGuess, char.toUpperCase()]);
     },
     [playerGuess]
   );
   const deleteChar = useCallback(() => {
-    const update = [...playerGuess];
-    update.pop();
     setHasError(false);
-    setPlayerGuess(update);
+    setPlayerGuess(playerGuess.slice(0, playerGuess.length - 1));
   }, [playerGuess]);
   const commitPlay = useCallback(() => {
-    if (wordList.indexOf(playerGuess.join('')) > -1) {
+    if (wordsSet.has(playerGuess.join(''))) {
       setHasError(false);
       setPlays([...plays, playerGuess]);
       setPlayerGuess([]);
     } else {
       setHasError(true);
     }
-  }, [playerGuess, plays, wordList]);
-
+  }, [playerGuess, plays, wordsSet]);
   const reset = useCallback(() => {
     setPlays([]);
     setHasError(false);
     setPlayerGuess([]);
   }, []);
-
   const onInput = useCallback(
     (keyInput: string) => {
       if (isAllowedLetter(keyInput) && playerGuess.length < wordsLength) {
@@ -84,8 +81,6 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
     };
   }, [i18n, onKeyUp, reset]);
 
-  console.log(selectedWord);
-
   return (
     <>
       <div
@@ -102,19 +97,19 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
               [Styles.winnerPlay]: idx === plays.length - 1 && isWinner,
             })}
             wordLength={wordsLength}
-            selectedWord={selectedWord.word}
-            charMap={selectedWord.chars}
+            selectedWord={word}
+            charMap={wordCharMap}
             playerGuess={play}
             withStatus
             hasError={false}
             isWinner={idx === plays.length - 1 && isWinner}
           />
         ))}
-        {plays.length <= MAX_TURNS - 1 && !isWinner ? (
+        {plays.length <= maxTurns - 1 && !isWinner ? (
           <WordBoard
             wordLength={wordsLength}
-            selectedWord={selectedWord.word}
-            charMap={selectedWord.chars}
+            selectedWord={word}
+            charMap={wordCharMap}
             playerGuess={playerGuess}
             withStatus={false}
             hasError={hasError}
@@ -127,17 +122,13 @@ export const Game: React.FC<GameProps> = ({ wordList, wordsLength }) => {
           <FinalBoard
             isWinner={isWinner}
             plays={plays}
-            word={selectedWord.word}
-            charMap={selectedWord.chars}
+            word={word}
+            charMap={wordCharMap}
           />
         </div>
       ) : (
         <div className={Styles.keyboardArea}>
-          <Keyboard
-            onKeyPress={onInput}
-            plays={plays}
-            selectedWord={selectedWord.word}
-          />
+          <Keyboard onKeyPress={onInput} plays={plays} selectedWord={word} />
         </div>
       )}
     </>

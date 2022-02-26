@@ -13,7 +13,7 @@ interface KeyProps {
   isCorrect?: boolean;
   onClick: (value: string) => void;
 }
-const Key: React.FC<KeyProps> = ({
+export const Key: React.FC<KeyProps> = ({
   value,
   label,
   isFound,
@@ -32,7 +32,7 @@ const Key: React.FC<KeyProps> = ({
         [Styled.notFound]: isNotFound,
       })}
       onClick={() => onClick(value)}
-      aria-label={`${value} key`}
+      title={value}
     >
       {label}
     </button>

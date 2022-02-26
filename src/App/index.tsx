@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { Header } from './components/Header';
-import { Game } from '../Game';
+import { Game } from '../Game/Game';
 import { useQuery } from 'react-query';
 
 import Styles from './App.module.css';
 import { Footer } from './components/Footer';
 import { useTranslation } from 'react-i18next';
+import { processWord } from '../Game/logic';
 
 const WORDS_LENGTH = 5;
+const MAX_TURNS = 6;
 
-const fetchWordsList = async (lang: string): Promise<string[]> => {
+const fetchWordsList = async (lang: string) => {
   const wordsJson = lang === 'es' ? '/data/es.json' : '/data/en.json';
   return fetch(`${window.location.origin}${wordsJson}`)
-    .then((r) => r.json())
+    .then((r) => r.json() as Promise<{ words: string[] }>)
     .then((list) => list.words.map((w: string) => w.toUpperCase()));
 };
 
@@ -29,6 +31,10 @@ const App: React.FC = () => {
       refetchOnWindowFocus: false,
     }
   );
+  const selection = useMemo(
+    () => processWord(query.data || [], i18n.language),
+    [i18n.language, query.data]
+  );
 
   return query.isLoading ? (
     <div className={Styles.loadingWrapper}>
@@ -37,7 +43,13 @@ const App: React.FC = () => {
   ) : (
     <>
       <Header />
-      <Game wordsLength={WORDS_LENGTH} wordList={query.data!} />
+      <Game
+        word={selection.word}
+        wordsSet={selection.wordSet}
+        wordCharMap={selection.chars}
+        wordsLength={WORDS_LENGTH}
+        maxTurns={MAX_TURNS}
+      />
       <Footer />
     </>
   );

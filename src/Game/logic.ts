@@ -8,9 +8,17 @@ interface KeyboardMatrix {
   es: KeyItem[][];
 }
 
+type KeySymbolMap = {
+  [key: string]: string;
+};
+const actionKeysSymbols: KeySymbolMap = {
+  Enter: '⏎',
+  Backspace: '⌫',
+};
+
 const keyMapper = (key: string): KeyItem => ({
   val: key.toUpperCase(),
-  label: key === 'Enter' ? '⏎' : key === 'Backspace' ? '⌫' : key,
+  label: actionKeysSymbols[key] || key,
 });
 export const langKeyboard: KeyboardMatrix = {
   en: [
@@ -29,8 +37,12 @@ export const langKeyboard: KeyboardMatrix = {
 export const isAllowedLetter = (s: string) =>
   s.length === 1 && /[a-zñ]/gi.test(s);
 
-export const selectWord = (list: string[], language: string) => {
-  const word = list[~~(list.length * Math.random())];
+export const processWord = (
+  list: string[],
+  language: string,
+  preselection?: string
+) => {
+  const word = preselection ?? list[~~(list.length * Math.random())];
   const chars = word.split('').reduce((map, char) => {
     const count = map.get(char) ?? 0;
 
@@ -40,6 +52,7 @@ export const selectWord = (list: string[], language: string) => {
 
   return {
     lang: language,
+    wordSet: new Set(list),
     word,
     chars,
   };

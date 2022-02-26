@@ -3,6 +3,7 @@ import React from 'react';
 import Styles from './WordBoard.module.css';
 import classNames from 'classnames';
 import { mapGuess } from '../logic';
+import { useTranslation } from 'react-i18next';
 
 interface WordBoardProps {
   className?: string;
@@ -24,6 +25,7 @@ export const WordBoard: React.FC<WordBoardProps> = ({
   hasError,
   isWinner,
 }) => {
+  const { t } = useTranslation();
   const statusMap = mapGuess(playerGuess, selectedWord, charMap);
   const letters = [...new Array(wordLength)].map((_, idx) => (
     <div
@@ -37,6 +39,7 @@ export const WordBoard: React.FC<WordBoardProps> = ({
         [Styles.found]: statusMap[idx]?.status === 'found',
         [Styles.correct]: statusMap[idx]?.status === 'correct',
       })}
+      aria-label={playerGuess[idx] ? playerGuess[idx] : ''}
     >
       <span>{playerGuess[idx] ? playerGuess[idx] : ''}</span>
       <span>{playerGuess[idx] ? playerGuess[idx] : ''}</span>
@@ -50,6 +53,12 @@ export const WordBoard: React.FC<WordBoardProps> = ({
         [Styles.hasError]: hasError,
         [Styles.isWinner]: isWinner,
       })}
+      aria-label={playerGuess.join('-')}
+      title={
+        playerGuess.length
+          ? t('playerGuess', { guess: playerGuess.join('-') })
+          : t('emptyPlayerGuess')
+      }
     >
       {letters}
     </div>

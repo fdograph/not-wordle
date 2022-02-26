@@ -1,7 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { getParams } from './hooks/useQueryString';
 
 const resources = {
   en: {
@@ -9,6 +8,8 @@ const resources = {
       appTitle: 'This is NOT Wordle',
       changeLanguageToText: 'ES {{targetLangFlag}}',
       changeLanguageToLabel: 'Jugar en Español',
+      playerGuess: '{{guess}}',
+      emptyPlayerGuess: 'Type a letter',
       tweetBody: 'I just completed a NOT Wordle! {{turn}}/{{maxTurns}}',
       youAreaWinner: 'You are the Winner!',
       youAreaLooser: 'You Loose :(',
@@ -25,6 +26,8 @@ const resources = {
       appTitle: 'Esto NO es Wordle',
       changeLanguageToText: 'EN {{targetLangFlag}}',
       changeLanguageToLabel: 'Play in English',
+      playerGuess: '{{guess}}',
+      emptyPlayerGuess: 'Tipea una letra',
       tweetBody: 'Acabo de completar este NO Wordle! {{turn}}/{{maxTurns}}',
       youAreaWinner: 'Has Ganado!',
       youAreaLooser: 'Perdiste el juego :(',
