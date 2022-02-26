@@ -20,7 +20,7 @@ const fetchWordsList = async (lang: string) => {
 };
 
 const App: React.FC = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const query = useQuery<string[]>(
     ['wordsList', i18n.language],
     () => fetchWordsList(i18n.language),
@@ -32,12 +32,13 @@ const App: React.FC = () => {
     }
   );
   const selection = useMemo(
-    () => processWord(query.data || [], i18n.language),
-    [i18n.language, query.data]
+    () =>
+      query.isLoading ? null : processWord(query.data || [], i18n.language),
+    [i18n.language, query.data, query.isLoading]
   );
 
-  return query.isLoading ? (
-    <div className={Styles.loadingWrapper}>
+  return query.isLoading || selection === null ? (
+    <div className={Styles.loadingWrapper} title={t('loading')}>
       <div className={Styles.spinner} />
     </div>
   ) : (

@@ -95,7 +95,7 @@ describe('Game Component', () => {
 
     const plays = screen.getAllByTitle('playerGuess');
     expect(plays).toHaveLength(baseProps.maxTurns);
-    expect(screen.queryAllByAltText('emptyPlayerGuess')).toHaveLength(0);
+    expect(screen.queryAllByTitle('emptyPlayerGuess')).toHaveLength(0);
   });
 
   it('Should allow to delete characters using BACKSPACE', () => {
@@ -119,6 +119,21 @@ describe('Game Component', () => {
 
     const plays = screen.getAllByTitle('playerGuess');
     expect(plays).toHaveLength(2);
-    expect(screen.queryAllByAltText('emptyPlayerGuess')).toHaveLength(0);
+    expect(screen.queryAllByTitle('emptyPlayerGuess')).toHaveLength(1);
+  });
+
+  it('Should win the game and show winning text', () => {
+    render(withI18n(<Game {...baseProps} />));
+
+    fireEvent.click(screen.getByText('a'));
+    fireEvent.click(screen.getByText('l'));
+    fireEvent.click(screen.getByText('e'));
+    fireEvent.click(screen.getByText('r'));
+    fireEvent.click(screen.getByText('t'));
+    fireEvent.click(screen.getByTitle('ENTER'));
+
+    expect(screen.getAllByTitle('playerGuess')).toHaveLength(1);
+    expect(screen.queryAllByText('emptyPlayerGuess')).toHaveLength(0);
+    expect(screen.queryAllByText('youAreaWinner')).toHaveLength(1);
   });
 });

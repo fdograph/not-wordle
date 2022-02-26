@@ -42,7 +42,10 @@ export const processWord = (
   language: string,
   preselection?: string
 ) => {
-  const word = preselection ?? list[~~(list.length * Math.random())];
+  const word =
+    preselection === undefined
+      ? list[~~(list.length * Math.random())]
+      : preselection;
   const chars = word.split('').reduce((map, char) => {
     const count = map.get(char) ?? 0;
 

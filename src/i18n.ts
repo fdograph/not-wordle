@@ -5,6 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 const resources = {
   en: {
     translation: {
+      loading: 'Loading',
       appTitle: 'This is NOT Wordle',
       changeLanguageToText: 'ES {{targetLangFlag}}',
       changeLanguageToLabel: 'Jugar en Español',
@@ -23,6 +24,7 @@ const resources = {
   },
   es: {
     translation: {
+      loading: 'Cargando',
       appTitle: 'Esto NO es Wordle',
       changeLanguageToText: 'EN {{targetLangFlag}}',
       changeLanguageToLabel: 'Play in English',
