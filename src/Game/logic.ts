@@ -34,6 +34,12 @@ export const langKeyboard: KeyboardMatrix = {
   ],
 };
 
+export const getCharCount = (s: string): Map<string, number> =>
+  s.split('').reduce((map, char) => {
+    map.set(char, (map.get(char) ?? 0) + 1);
+    return map;
+  }, new Map<string, number>());
+
 export const isAllowedLetter = (s: string) =>
   s.length === 1 && /[a-zñ]/gi.test(s);
 
@@ -42,12 +48,8 @@ export const processWord = (list: string[], preselection?: string) => {
     preselection === undefined
       ? list[~~(list.length * Math.random())]
       : preselection;
-  const chars = word.split('').reduce((map, char) => {
-    const count = map.get(char) ?? 0;
 
-    map.set(char, count + 1);
-    return map;
-  }, new Map<string, number>());
+  const chars = getCharCount(word);
 
   return {
     wordSet: new Set(list),

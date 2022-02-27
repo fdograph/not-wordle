@@ -1,10 +1,24 @@
 import React from 'react';
-import { I18nextProvider } from 'react-i18next';
+import { I18nextProvider, I18nextProviderProps } from 'react-i18next';
 import i18nInstance from './mockI18n';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-export const withI18n = (children: React.ReactNode) => {
-  return <I18nextProvider i18n={i18nInstance}>{children}</I18nextProvider>;
+export const withI18n = (
+  children: React.ReactNode,
+  mock?: Partial<I18nextProviderProps['i18n']>
+) => {
+  let mockI18n = i18nInstance;
+
+  if (mock !== undefined) {
+    mockI18n = {
+      ...i18nInstance,
+      on: jest.fn(),
+      off: jest.fn(),
+      ...mock,
+    };
+  }
+
+  return <I18nextProvider i18n={mockI18n}>{children}</I18nextProvider>;
 };
 
 const queryClient = new QueryClient();
@@ -14,6 +28,9 @@ export const withQueryClient = (children: React.ReactNode) => {
   );
 };
 
-export const withProviders = (children: React.ReactNode) => {
-  return withI18n(withQueryClient(children));
+export const withProviders = (
+  children: React.ReactNode,
+  mockI18n?: Partial<I18nextProviderProps['i18n']>
+) => {
+  return withI18n(withQueryClient(children), mockI18n);
 };
