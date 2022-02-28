@@ -28,6 +28,8 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/i18n.ts",
       "!src/index.tsx",
+      "!src/react-app-env.d.ts",
+      "!src/testUtils/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/node_modules/"
     ],
     "coverageReporters": [
